@@ -47,40 +47,7 @@ class _ReelsControllerState extends State<ReelsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   leading: IconButton(
-      //     onPressed: () {
-      //       //pause video when back button is pressed
-
-      //       Navigator.pushAndRemoveUntil(context,
-      //           MaterialPageRoute(builder: (context) {
-      //         return const GridVideos();
-      //       }), (route) => false);
-      //     },
-      //     icon: const Icon(
-      //       Icons.grid_view_rounded,
-      //       color: Colors.white,
-      //     ),
-      //   ),
-      //   backgroundColor: Color.fromARGB(255, 7, 13, 33),
-      //   actions: [
-      //     Padding(
-      //       padding: const EdgeInsets.all(8.0),
-      //       child: Container(
-      //           height: 30,
-      //           width: 30,
-      //           decoration: BoxDecoration(
-      //             // border: Border.all(color: Colors.white),
-      //             borderRadius: BorderRadius.circular(100),
-      //             image: const DecorationImage(
-      //                 image: AssetImage("assets/images/Logo.png"),
-      //                 fit: BoxFit.cover,
-      //                 scale: 1),
-      //           )),
-      //     ),
-      //   ],
-      // ),
-      backgroundColor: const Color.fromARGB(255, 7, 13, 33),
+      backgroundColor: Colors.black,
       body: Stack(children: [
         _video.isNotEmpty
             ? PageView.builder(
@@ -98,53 +65,31 @@ class _ReelsControllerState extends State<ReelsController> {
                 ),
               ),
         Padding(
-          padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      //pause video when back button is pressed
-
-                      Navigator.pushAndRemoveUntil(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const GridVideos();
-                      }), (route) => false);
-                    },
-                    icon: const Icon(Icons.grid_view_rounded,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(
-                            blurRadius: 20.0,
-                            color: Colors.black54,
-                            offset: Offset(1.0, 1.0),
-                          ),
-                        ]),
-                  ),
-                  Container(
-                      height: 30,
-                      width: 30,
-                      decoration: BoxDecoration(
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black54,
-                            spreadRadius: 1,
-                            blurRadius: 20,
-                            offset: Offset(1, 1), // changes position of shadow
-                          ),
-                        ],
-                        // border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(100),
-                        image: const DecorationImage(
-                          image: AssetImage("assets/images/Logo.png"),
-                          fit: BoxFit.cover,
-                          scale: 1,
-                        ),
-                      )),
-                ]),
-          ),
+          padding: const EdgeInsets.only(top: 40, left: 5),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(context,
+                      MaterialPageRoute(builder: (context) {
+                    return const GridVideos();
+                  }), (route) => false);
+                },
+                icon: const Icon(Icons.grid_view_rounded,
+                    size: 30,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 20.0,
+                        color: Colors.black54,
+                        offset: Offset(1.0, 1.0),
+                      ),
+                    ]),
+              ),
+            ),
+          ]),
         ),
       ]),
     );

@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:video_player/video_player.dart';
 import 'Models/video.dart';
-import 'grid_videos.dart';
 
 class ReelsItem extends StatefulWidget {
-  //Url to play video
   final Video video_;
   const ReelsItem({Key? key, required this.video_}) : super(key: key);
 
@@ -45,21 +43,12 @@ class _ReelsItemState extends State<ReelsItem> {
         });
       });
     }
-
-    // _controller!.addListener(() {
-    //   if (_controller!.value.position == _controller!.value.duration) {
-    //     Future.delayed(const Duration(seconds: 1), () {
-    //       _controller!.seekTo(const Duration(seconds: 0));
-    //       _controller!.play();
-    //     });
-    //   }
-    // });
   }
 
 //check for cache
   Future<FileInfo?> checkCacheFor(String url) async {
     final FileInfo? value = await DefaultCacheManager().getFileFromCache(url);
-// if file is older than 7 days then remove it
+// if file is older than 7 days then will remove it
     if (value != null &&
         DateTime.now().difference(value.file.lastModifiedSync()).inDays > 7) {
       await DefaultCacheManager().removeFile(url);
@@ -128,9 +117,10 @@ class _ReelsItemState extends State<ReelsItem> {
                     ),
                   ),
                   Padding(
-                      padding: const EdgeInsets.only(right: 15, bottom: 40),
+                      padding: const EdgeInsets.only(right: 15, bottom: 60),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Row(
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -151,19 +141,22 @@ class _ReelsItemState extends State<ReelsItem> {
                                         widget.video_.profilePhoto))
                               ]),
                           const SizedBox(
-                            height: 5,
+                            height: 10,
                           ),
-                          const SizedBox(
-                            height: 50,
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: Text(
-                                "کۆمپانیای مەزاد لە بواری عەقارات کاردەکات بە نوێترین سیستەم، بۆ زانیاری زیاتر و پەیوەندی کردن 07500291919",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
+                          Padding(
+                            padding: const EdgeInsets.only(right: 5, left: 5),
+                            child: SizedBox(
+                              height: 60,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                child: Text(
+                                  widget.video_.caption,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.right,
                                 ),
-                                textAlign: TextAlign.right,
                               ),
                             ),
                           ),

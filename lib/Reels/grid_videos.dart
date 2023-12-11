@@ -1,8 +1,7 @@
 import 'package:m19play/Reels/controller/reels_controller.dart';
-import 'package:m19play/Reels/uploadscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'Models/video.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class GridVideos extends StatefulWidget {
   const GridVideos({super.key});
@@ -20,18 +19,8 @@ class _GridVideosState extends State<GridVideos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Reels"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const UploadScreen()));
-            },
-            icon: const Icon(Icons.add),
-          ),
-        ],
+        title: const Text("M19 PLAY"),
+        actions: [],
       ),
       body: SafeArea(
         child: Padding(
@@ -48,7 +37,7 @@ class _GridVideosState extends State<GridVideos> {
                   }
                   if (!snapshot.hasData) {
                     return const Center(
-                      child: Text("No Data"),
+                      child: Text("No Video"),
                     );
                   }
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -81,8 +70,9 @@ class _GridVideosState extends State<GridVideos> {
                                 borderRadius: BorderRadius.circular(5),
                                 color: Colors.grey[300],
                                 image: DecorationImage(
-                                  image: NetworkImage(snapshot.data!.docs[index]
-                                      .get("thumbnail")),
+                                  image: CachedNetworkImageProvider(
+                                    snapshot.data!.docs[index].get("thumbnail"),
+                                  ),
                                   fit: BoxFit.cover,
                                 ),
                                 boxShadow: [
@@ -100,7 +90,6 @@ class _GridVideosState extends State<GridVideos> {
                       ),
                     );
                   }
-
                   return const CircularProgressIndicator();
                 },
               ),
